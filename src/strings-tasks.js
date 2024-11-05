@@ -309,8 +309,9 @@ function containsSubstring(str, substring) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  const m = str.match(/[AaEeIiOoUuYy]/gi);
+  return m === null ? 0 : m.length;
 }
 
 /**
@@ -326,8 +327,14 @@ function countVowels(/* str */) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const replacedStr = str.toLowerCase().replaceAll(/[^a-z]+/g, '');
+  for (let i = 0; i < replacedStr.length / 2; i += 1) {
+    if (replacedStr[i] !== replacedStr[replacedStr.length - 1 - i]) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -342,8 +349,15 @@ function isPalindrome(/* str */) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  const words = sentence.split(' ');
+  let word = words[0];
+  for (let i = 1; i < words.length; i += 1) {
+    if (words[i].length > word.length) {
+      word = words[i];
+    }
+  }
+  return word;
 }
 
 /**
@@ -356,8 +370,12 @@ function findLongestWord(/* sentence */) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  const words = str.split(' ');
+  for (let i = 0; i < words.length; i += 1) {
+    words[i] = words[i].split('').reverse().join('');
+  }
+  return words.join(' ');
 }
 
 /**
@@ -371,8 +389,17 @@ function reverseWords(/* str */) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  const letters = str.split('').map((item) => {
+    if (item === item.toUpperCase()) {
+      return item.toLowerCase();
+    }
+    if (item === item.toLowerCase()) {
+      return item.toUpperCase();
+    }
+    return '';
+  });
+  return letters.join('');
 }
 
 /**
