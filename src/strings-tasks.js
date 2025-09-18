@@ -455,8 +455,19 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const alphabet =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz';
+  let newStr = '';
+
+  for (let i = 0; i < str.length; i += 1) {
+    if (!alphabet.includes(str[i])) {
+      newStr += str[i];
+    } else {
+      newStr += str[i].replace(str[i], alphabet[alphabet.indexOf(str[i]) + 13]);
+    }
+  }
+  return newStr;
 }
 
 /**
@@ -483,8 +494,11 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  return (
+    '♣♦♥♠'.indexOf(value[value.length - 1]) * 13 +
+    'A234567891JQK'.indexOf(value[0])
+  );
 }
 
 module.exports = {
